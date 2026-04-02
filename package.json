@@ -1,12 +1,16 @@
 {
-  "name": "iobroker.frankfurt-boerse",
-  "version": "0.2.0",
+  "name": "iobroker.aktienkurse",
+  "version": "0.4.5",
   "description": "Abfrage von Aktienkursen der Frankfurter Börse",
   "main": "main.js",
   "dependencies": {
-    "axios": "^1.0.1",
+    "axios": "^1.0.0",
     "@iobroker/adapter-core": "^3.0.0"
   },
   "author": "samazw",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  }
 }
