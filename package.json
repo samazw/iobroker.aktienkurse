@@ -1,0 +1,12 @@
+{
+  "name": "iobroker.frankfurt-boerse",
+  "version": "0.1.0",
+  "description": "Abfrage von Aktienkursen der Frankfurter Börse",
+  "main": "main.js",
+  "dependencies": {
+    "axios": "^1.0.1",
+    "@iobroker/adapter-core": "^3.0.0"
+  },
+  "author": "samazw",
+  "license": "MIT"
+}
