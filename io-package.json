@@ -1,13 +1,7 @@
 {
   "common": {
     "name": "aktienkurse",
-    "version": "0.6.5",
-    "news": {
-      "0.6.5": {
-        "en": "Switched to text-based list to fix GUI crash",
-        "de": "Auf textbasierte Liste umgestellt, um GUI-Absturz zu beheben"
-      }
-    },
+    "version": "0.7.0",
     "title": "Aktienkurse Frankfurt",
     "authors": ["samazw"],
     "license": "MIT",
