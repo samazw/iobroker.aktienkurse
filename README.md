@@ -1,0 +1,2 @@
+# aktienkurse
+Aktienkurse in iobroker
