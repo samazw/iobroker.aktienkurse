@@ -3,7 +3,7 @@
   "items": {
     "aktienListe": {
       "type": "table",
-      "label": "Deine Aktienliste (Frankfurt .F)",
+      "label": "Deine Aktienliste (Börse Frankfurt .F)",
       "sm": 12,
       "items": {
         "symbol": {
@@ -109,7 +109,8 @@
             {"value": "WMT.F", "label": "Walmart (Retail)"},
             {"value": "DIS.F", "label": "Disney (Media)"},
             {"value": "SQ.F", "label": "Block / Square"},
-            {"value": "A2P7ZJ.F", "label": "DeFi Technologies Inc."}
+            {"value": "A2P7ZJ.F", "label": "DeFi Technologies Inc."},
+            {"value": "PYPL.F", "label": "PayPal (Fintech)"}
           ]
         }
       }
