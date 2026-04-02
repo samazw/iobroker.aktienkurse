@@ -1,6 +1,6 @@
 {
   "name": "iobroker.aktienkurse",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Abfrage von Aktienkursen der Frankfurter Börse",
   "main": "main.js",
   "dependencies": {
