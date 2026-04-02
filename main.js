@@ -1,44 +1,44 @@
-const utils = require('@iobroker/adapter-core');
-const axios = require('axios');
+"use strict";
 
-class FrankfurtBoerse extends utils.Adapter {
+const utils = require("@iobroker/adapter-core");
+const axios = require("axios");
+
+class Aktienkurse extends utils.Adapter {
     constructor(options) {
-        super({ ...options, name: 'frankfurt-boerse' });
-        this.on('ready', this.onReady.bind(this));
-        this.on('unload', this.onUnload.bind(this));
+        super({ ...options, name: "aktienkurse" });
+        this.on("ready", this.onReady.bind(this));
+        this.on("unload", this.onUnload.bind(this));
+        this.updateInterval = null;
     }
 
     async onReady() {
-        // Ersten Durchlauf starten
+        this.log.info("Adapter startet und bereitet Aktienliste vor...");
         await this.updateData();
         
-        // Intervall einrichten
         const intervall = parseInt(this.config.intervall) || 10;
         this.updateInterval = setInterval(() => this.updateData(), intervall * 60000);
     }
 
     async updateData() {
-        const aktien = this.config.aktienListe;
-        if (!aktien || !Array.isArray(aktien)) {
-            this.log.info('Keine Aktien in der Liste konfiguriert.');
+        const rawList = this.config.aktienListeText || "";
+        const aktien = rawList.split(",").map(s => s.trim()).filter(s => s.length > 0);
+
+        if (aktien.length === 0) {
+            this.log.info("Keine Aktien-Symbole konfiguriert.");
             return;
         }
 
-        for (const eintrag of aktien) {
-            const symbol = eintrag.symbol;
-            if (!symbol) continue;
+        for (const symbol of aktien) {
+            const cleanSymbol = symbol.replace(".", "_");
+            const dpName = `Aktien.kurs_${cleanSymbol}`;
 
-            // Pfad mit Unterordner "Aktien"
-            const dpName = `Aktien.kurs_${symbol.replace('.', '_')}`;
-
-            // Datenpunkt im Unterordner erstellen
             await this.setObjectNotExistsAsync(dpName, {
-                type: 'state',
+                type: "state",
                 common: {
                     name: `Kurs ${symbol}`,
-                    type: 'number',
-                    role: 'value.price',
-                    unit: 'EUR',
+                    type: "number",
+                    role: "value.price",
+                    unit: "EUR",
                     read: true,
                     write: false
                 },
@@ -65,15 +65,19 @@ class FrankfurtBoerse extends utils.Adapter {
     }
 
     onUnload(callback) {
-        if (this.updateInterval) {
-            clearInterval(this.updateInterval);
+        try {
+            if (this.updateInterval) {
+                clearInterval(this.updateInterval);
+            }
+            callback();
+        } catch (e) {
+            callback();
         }
-        callback();
     }
 }
 
 if (require.main === module) {
-    new FrankfurtBoerse();
+    new Aktienkurse();
 } else {
-    module.exports = FrankfurtBoerse;
+    module.exports = Aktienkurse;
 }
